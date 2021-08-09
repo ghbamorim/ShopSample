@@ -1,5 +1,6 @@
 import express from "express";
 import {UserController} from "./controllers/userController"
+import {ValidationError} from './models/types'
 
 const server = express();
 server.use(express.json())
@@ -11,9 +12,9 @@ server.get("/", (request, response) => {
 });
 
 server.post("/newUser", async (request, response) => {
-  const errors : any[] = [];
+  const errors : ValidationError[] = [];
   try{
-    const u = new UserController();    
+    const u = new UserController();
     if (await u.newUser(request.body, errors)){
       response.status(201).json({
           ok : true,
