@@ -34,4 +34,42 @@ server.post("/newUser", async (request, response) => {
 }
 });
 
+server.patch("/updateUser", async (request, response) => {
+  const errors : ValidationError[] = [];
+  try{
+    const u = new UserController();
+    if (await u.updateUser(request.body, errors)){
+      response.status(201).json({
+          ok : true,
+          message: "Successfully updated",
+      });
+  } else {
+    response.status(400).json({
+      errors
+  });
+  }
+} catch (err) {
+  response.status(400).json({
+        ok: false,
+        message: err.message,
+        err: err
+    });
+}
+});
+
+
+server.get("/getUsers", async (request, response) => {
+  try{
+    const u = new UserController();
+    response.status(201).json(await u.getUsers());
+  }
+  catch (err) {
+  response.status(400).json({
+        ok: false,
+        message: err.message,
+        err: err
+    });
+}
+});
+
 export default server;
