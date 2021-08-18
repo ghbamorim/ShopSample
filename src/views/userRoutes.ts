@@ -4,10 +4,6 @@ import { Router } from 'express';
 
 export const userRoutes = Router();
 
-userRoutes.get('/teste', (request, response) => {
-  return response.send('Hello2!');
-});
-
 userRoutes.post('/newUser', async (request, response) => {
   const errors: ValidationError[] = [];
   try {
