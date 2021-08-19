@@ -1,3 +1,4 @@
+require('dotenv-safe').config();
 import express from 'express';
 import { userRoutes } from './views/userRoutes';
 import { productRoutes } from './views/productRoutes';
@@ -7,8 +8,8 @@ const server = express();
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use('/v1/users', userRoutes);
-server.use('/v1/products', productRoutes);
+server.use('/v1/user', userRoutes);
+server.use('/v1/product', productRoutes);
 
 server.listen(port);
 
