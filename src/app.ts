@@ -2,7 +2,7 @@ import express from 'express';
 import { userRoutes } from './views/userRoutes';
 import { productRoutes } from './views/productRoutes';
 
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 3000;
 const server = express();
 
 server.use(express.json());

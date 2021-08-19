@@ -1,29 +1,26 @@
-import {DataTypes, Sequelize, Model} from 'sequelize';
-import {db} from "../db/db";
+import { DataTypes, Sequelize, Model } from 'sequelize';
+import { db } from '../db/db';
 
 export class Product extends Model {
   public id!: number;
   public description!: string;
-  public Qty! :number;
+  public qty!: number;
 }
 
-const sequelize : Sequelize = db
+const sequelize: Sequelize = db;
 
-Product.init({
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false
+Product.init(
+  {
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    qty: {
+      type: DataTypes.NUMBER,
+    },
   },
-  Qty: {
-    type: DataTypes.NUMBER
-  }
-}, {
-  sequelize,
-  modelName: 'Product',
-});
-
-
-/*(async () => {
-  await sequelize.sync({ force: true });
-  // Code here
-})();*/
+  {
+    sequelize,
+    modelName: 'Product',
+  },
+);
