@@ -1,6 +1,6 @@
 import { DataTypes, Sequelize, Model } from 'sequelize';
 import { db } from '../db/db';
-import { IBasicModel, BasicModel } from "./basicModel"
+import { IBasicModel, BasicModel } from './basicModel';
 
 export interface IUser extends IBasicModel {
   id: number;
@@ -9,7 +9,7 @@ export interface IUser extends IBasicModel {
   password: string;
 }
 
-export class User implements IUser extends BasicModel {
+export class User extends BasicModel implements IUser {
   public id!: number;
   public firstName!: string;
   public lastName!: string | null;
