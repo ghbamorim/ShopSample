@@ -62,3 +62,26 @@ productRoutes.get('/getProducts', async (request, response) => {
     });
   }
 });
+
+productRoutes.patch('/save', async (request, response) => {
+  const errors: ValidationError[] = [];
+  try {
+    const p = new ProductController();
+    if (await p.updateProduct(request.body, errors)) {
+      response.status(201).json({
+        ok: true,
+        message: 'Successfully updated',
+      });
+    } else {
+      response.status(400).json({
+        errors,
+      });
+    }
+  } catch (err) {
+    response.status(400).json({
+      ok: false,
+      message: err.message,
+      err: err,
+    });
+  }
+});

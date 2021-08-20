@@ -1,14 +1,15 @@
 import { DataTypes, Sequelize, Model } from 'sequelize';
 import { db } from '../db/db';
+import { IBasicModel, BasicModel } from "./basicModel"
 
-export interface IUser {
+export interface IUser extends IBasicModel {
   id: number;
   firstName: string;
   lastName: string | null;
   password: string;
 }
 
-export class User extends Model {
+export class User implements IUser extends BasicModel {
   public id!: number;
   public firstName!: string;
   public lastName!: string | null;

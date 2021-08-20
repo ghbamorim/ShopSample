@@ -1,7 +1,14 @@
 import { DataTypes, Sequelize, Model } from 'sequelize';
 import { db } from '../db/db';
+import { IBasicModel, BasicModel } from "./basicModel"
 
-export class Product extends Model {
+export interface IProduct extends IBasicModel {
+  id: number;
+  description: string;
+  qty: number;
+}
+
+export class Product implements IProduct extends BasicModel {
   public id!: number;
   public description!: string;
   public qty!: number;

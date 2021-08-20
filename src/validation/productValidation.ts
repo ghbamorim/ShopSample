@@ -1,8 +1,8 @@
-import {Product} from '../models/product'
+import {Product, IProduct} from '../models/product'
 import {ValidationError} from '../models/types'
 
 export class ProductValidations {
-  static validateInsert = (prod : Product, errors : ValidationError[]) => {
+  static validateInsert = (prod : IProduct, errors : ValidationError[]) => {
     if (prod.description === '') {
       errors.push(
         {field: "description",
@@ -14,7 +14,7 @@ export class ProductValidations {
     return true;
   }
 
-  static validateUpdate = (prod : Product, errors : ValidationError[]) => {
+  static validateUpdate = (prod : IProduct, errors : ValidationError[]) => {
     let valid : Boolean = true;
 
     if (!prod.id) {
