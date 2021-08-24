@@ -1,14 +1,14 @@
-import { ProductController } from '../controllers/productController';
+import { SaleController } from '../controllers/salesController';
 import { ValidationError } from '../models/types';
 import { Router } from 'express';
 
-export const productRoutes = Router();
+export const saleRoutes = Router();
 
-productRoutes.post('/new', async (request, response) => {
+saleRoutes.post('/new', async (request, response) => {
   const errors: ValidationError[] = [];
   try {
-    const u = new ProductController();
-    if (await u.newProduct(request.body, errors)) {
+    const u = new SaleController();
+    if (await u.newSale(request.body, errors)) {
       response.status(201).json({
         ok: true,
         message: 'Successfully created',
@@ -27,11 +27,11 @@ productRoutes.post('/new', async (request, response) => {
   }
 });
 
-productRoutes.patch('/update', async (request, response) => {
+saleRoutes.patch('/update', async (request, response) => {
   const errors: ValidationError[] = [];
   try {
-    const p = new ProductController();
-    if (await p.updateProduct(request.body, errors)) {
+    const p = new SaleController();
+    if (await p.updateSale(request.body, errors)) {
       response.status(201).json({
         ok: true,
         message: 'Successfully updated',
@@ -50,10 +50,10 @@ productRoutes.patch('/update', async (request, response) => {
   }
 });
 
-productRoutes.get('/getProducts', async (request, response) => {
+saleRoutes.get('/getSales', async (request, response) => {
   try {
-    const p = new ProductController();
-    response.status(201).json(await p.getProducts());
+    const p = new SaleController();
+    response.status(201).json(await p.getSales());
   } catch (err) {
     response.status(400).json({
       ok: false,
@@ -63,11 +63,11 @@ productRoutes.get('/getProducts', async (request, response) => {
   }
 });
 
-productRoutes.patch('/save', async (request, response) => {
+saleRoutes.patch('/save', async (request, response) => {
   const errors: ValidationError[] = [];
   try {
-    const p = new ProductController();
-    if (await p.updateProduct(request.body, errors)) {
+    const p = new SaleController();
+    if (await p.updateSale(request.body, errors)) {
       response.status(201).json({
         ok: true,
         message: 'Successfully updated',
