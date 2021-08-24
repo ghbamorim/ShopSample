@@ -1,49 +1,18 @@
+import { Association, DataTypes, Model, Sequelize } from 'sequelize';
 import { db } from '../db/db';
+import { IBasicModel, BasicModel } from './basicModel';
 import { SaleItems } from './saleitem';
-import {
-  Sequelize,
-  Model,
-  ModelDefined,
-  DataTypes,
-  HasManyGetAssociationsMixin,
-  HasManyAddAssociationMixin,
-  HasManyHasAssociationMixin,
-  Association,
-  HasManyCountAssociationsMixin,
-  HasManyCreateAssociationMixin,
-  Optional,
-} from 'sequelize';
 
 const sequelize: Sequelize = db;
 
-export interface ISale {
-  id: number;
+export interface ISale extends IBasicModel {
   description: string;
   date: Date;
 }
 
-interface ISaleCreationAttr extends Optional<ISale, 'id'> {}
-
-export class Sale
-  extends Model<ISale, ISaleCreationAttr>
-  implements ISale
-{
-  public id!: number;
+export class Sale extends BasicModel implements ISale {
   public description: string = '';
   public date!: Date;
-  //public SaleItems!: SaleItems[];
-
-  public getSaleItems!: HasManyGetAssociationsMixin<SaleItems>; // Note the null assertions!
-  public addSaleItems!: HasManyAddAssociationMixin<SaleItems, number>;
-  public hasSaleItems!: HasManyHasAssociationMixin<SaleItems, number>;
-  public countSaleItems!: HasManyCountAssociationsMixin;
-  public createSaleItem!: HasManyCreateAssociationMixin<SaleItems>;
-
-  public readonly SaleItems?: SaleItems[];
-
-  public static associations: {
-    projects: Association<Sale, SaleItems>;
-  };
 }
 
 Sale.init(
@@ -71,5 +40,4 @@ Sale.init(
 Sale.hasMany(SaleItems, {
   sourceKey: 'id',
   foreignKey: 'SaleId',
-  //as: 'Sales', // this determines the name in `associations`!
 });

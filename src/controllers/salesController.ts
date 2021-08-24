@@ -1,6 +1,5 @@
-import { Sale, ISale } from '../models/Sale';
 import { db } from '../db/db';
-import { SaleItems } from '../models/saleitem';
+import { ISale, Sale } from '../models/Sale';
 import { ValidationError } from '../models/types';
 import { SaleValidations } from '../validation/SaleValidation';
 const { Sequelize } = require('sequelize');
@@ -28,14 +27,17 @@ export class SaleController {
   };
 
   getSales = async () => {
-    const result = await Sale.findAll({
+    /*return await Sale.findAll({
       include: [
         {
           model: db.model('SaleItems'),
           as: 'SaleItems',
-        },
+        }
       ],
+    });*/
+
+    return await Sale.findAll({
+      include: { all: true, nested: true },
     });
-    return result as Sale[];
   };
 }

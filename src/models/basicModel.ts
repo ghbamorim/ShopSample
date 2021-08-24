@@ -9,8 +9,14 @@ export enum Action {
 
 export interface IBasicModel {
   action: Action;
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class BasicModel extends Model implements IBasicModel {
   public action: Action = Action.none;
+  public id!: number;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }

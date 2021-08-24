@@ -18,7 +18,6 @@ module.exports = {
           key: 'id',
         },
       },
-
       SaleId: {
         type: Sequelize.INTEGER,
         references: {
@@ -26,7 +25,6 @@ module.exports = {
           key: 'id',
         },
       },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

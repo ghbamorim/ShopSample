@@ -1,27 +1,20 @@
+import { DataTypes, Model, Sequelize } from 'sequelize';
 import { db } from '../db/db';
-import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
+import { IBasicModel, BasicModel } from './basicModel';
+import { Product } from './product';
 
 const sequelize: Sequelize = db;
 
-export interface ISaleItems {
-  id: number;
+export interface ISaleItems extends IBasicModel {
   Qti: number;
   ProductId: number;
   SaleId: number;
 }
 
-interface ISaleItemsCreationAttr extends Optional<ISaleItems, 'id'> {}
-
-export class SaleItems
-  extends Model<ISaleItems, ISaleItemsCreationAttr>
-  implements ISaleItems
-{
-  public id!: number;
+export class SaleItems extends BasicModel implements ISaleItems {
   public Qti!: number;
   public ProductId!: number;
   public SaleId!: number;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
 }
 
 SaleItems.init(
@@ -49,3 +42,8 @@ SaleItems.init(
     sequelize,
   },
 );
+
+SaleItems.hasOne(Product, {
+  sourceKey: 'ProductId',
+  foreignKey: 'id',
+});
