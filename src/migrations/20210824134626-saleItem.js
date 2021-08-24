@@ -1,30 +1,32 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('SaleItem', {
+    await queryInterface.createTable('SaleItems', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      saleId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Sale',
-          key: 'id',
-        },
+      Qti: {
+        type: Sequelize.INTEGER
       },
-      productId: {
+      ProductId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Product',
           key: 'id',
         },
       },
-      qti: {
-        type: Sequelize.INTEGER
+
+      SaleId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Sale',
+          key: 'id',
+        },
       },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

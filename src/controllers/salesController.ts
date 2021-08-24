@@ -1,6 +1,9 @@
 import { Sale, ISale } from '../models/Sale';
+import { db } from '../db/db';
+import { SaleItems } from '../models/saleitem';
 import { ValidationError } from '../models/types';
 import { SaleValidations } from '../validation/SaleValidation';
+const { Sequelize } = require('sequelize');
 
 export class SaleController {
   newSale = async (data: ISale, errors: ValidationError[]) => {
@@ -25,6 +28,14 @@ export class SaleController {
   };
 
   getSales = async () => {
-    return await Sale.findAll();
+    const result = await Sale.findAll({
+      include: [
+        {
+          model: db.model('SaleItems'),
+          as: 'SaleItems',
+        },
+      ],
+    });
+    return result as Sale[];
   };
 }
