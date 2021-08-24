@@ -1,6 +1,7 @@
 import { DataTypes, Sequelize, Model } from 'sequelize';
 import { db } from '../db/db';
 import { IBasicModel, BasicModel } from './basicModel';
+import { SaleItem } from './saleitem';
 
 export interface ISale extends IBasicModel {
   id: number;
@@ -31,3 +32,5 @@ Sale.init(
     modelName: 'Sale',
   },
 );
+
+Sale.hasMany(SaleItem);
