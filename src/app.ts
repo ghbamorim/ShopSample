@@ -6,7 +6,7 @@ import { saleRoutes } from './views/salesRoutes';
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 2000;
 const server = express();
 
 server.use(express.json());

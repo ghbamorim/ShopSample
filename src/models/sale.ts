@@ -8,11 +8,13 @@ const sequelize: Sequelize = db;
 export interface ISale extends IBasicModel {
   description: string;
   date: Date;
+  SaleItems: SaleItems[];
 }
 
 export class Sale extends BasicModel implements ISale {
-  public description: string = '';
+  public description!: string;
   public date!: Date;
+  public SaleItems!: SaleItems[];
 }
 
 Sale.init(
@@ -40,4 +42,5 @@ Sale.init(
 Sale.hasMany(SaleItems, {
   sourceKey: 'id',
   foreignKey: 'SaleId',
+  onDelete: 'cascade',
 });

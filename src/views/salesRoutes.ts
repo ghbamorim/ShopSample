@@ -63,11 +63,11 @@ saleRoutes.get('/getSales', async (request, response) => {
   }
 });
 
-saleRoutes.patch('/save', async (request, response) => {
+saleRoutes.post('/save', async (request, response) => {
   const errors: ValidationError[] = [];
   try {
     const p = new SaleController();
-    if (await p.updateSale(request.body, errors)) {
+    if (await p.save(request.body, errors)) {
       response.status(201).json({
         ok: true,
         message: 'Successfully updated',
@@ -77,11 +77,11 @@ saleRoutes.patch('/save', async (request, response) => {
         errors,
       });
     }
-  } catch (err) {
+  } catch (ex) {
     response.status(400).json({
       ok: false,
-      message: err.message,
-      err: err,
+      message: ex.message | ex,
+      err: ex,
     });
   }
 });
