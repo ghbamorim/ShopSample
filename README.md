@@ -1,1 +1,1 @@
-# ShopSample
+# This project is in development
